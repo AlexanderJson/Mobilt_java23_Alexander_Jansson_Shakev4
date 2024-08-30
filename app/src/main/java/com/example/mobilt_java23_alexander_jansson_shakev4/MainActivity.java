@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -30,10 +31,10 @@ public class MainActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        }
+                    Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+                    v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+                    return insets;
+                }
         );
 
         SensorManager sm = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
@@ -42,7 +43,6 @@ public class MainActivity extends AppCompatActivity {
         Sensor gyroscope = sm.getDefaultSensor(Sensor.TYPE_GYROSCOPE);
 
         Button button = findViewById(R.id.ShakeButton);
-        TextView text = findViewById(R.id.ShakeText);
 
         SensorEventListener sensorEventListener = new SensorEventListener() {
             @Override
@@ -64,8 +64,13 @@ public class MainActivity extends AppCompatActivity {
                     float rotation = (float) Math.sqrt(Math.pow(rotX,exponent) + Math.pow(rotY,exponent) + Math.pow(rotZ,exponent));
                     float maxRotation = 2.0f;
                     if(rotation > maxRotation){
-                        button.setBackgroundColor(Color.RED);
-                        Log.i("Rotation:", "Phone rotated quickly!" + rotation);
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                button.setBackgroundColor(Color.RED);
+                                Toast.makeText(MainActivity.this, "Rotatated quickly at:  " + rotation, Toast.LENGTH_SHORT).show();
+                            }
+                        });
                     }
 
                 }
@@ -80,6 +85,8 @@ public class MainActivity extends AppCompatActivity {
         sm.registerListener(sensorEventListener, accelerometer, SensorManager.SENSOR_DELAY_NORMAL);
         sm.registerListener(sensorEventListener, gyroscope, SensorManager.SENSOR_DELAY_NORMAL);
 
-        }
     }
+}
+
+
 
