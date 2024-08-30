@@ -56,10 +56,17 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 if (e.sensor.getType() == Sensor.TYPE_GYROSCOPE){
+
+                    double exponent = 2;
                     float rotX = e.values[0];
                     float rotY = e.values[1];
                     float rotZ = e.values[2];
-                    text.setText(String.format("X: %.2f, Y: %.2f, Z: %.2f", rotX, rotY, rotZ));
+                    float rotation = (float) Math.sqrt(Math.pow(rotX,exponent) + Math.pow(rotY,exponent) + Math.pow(rotZ,exponent));
+                    float maxRotation = 2.0f;
+                    if(rotation > maxRotation){
+                        button.setBackgroundColor(Color.RED);
+                        Log.i("Rotation:", "Phone rotated quickly!" + rotation);
+                    }
 
                 }
             }
