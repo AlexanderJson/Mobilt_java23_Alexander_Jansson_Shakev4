@@ -10,26 +10,42 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Surface;
+import android.view.SurfaceHolder;
+import android.view.SurfaceView;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import android.media.MediaPlayer;
+
 
 import org.w3c.dom.Text;
 
+import java.io.IOException;
+
 public class MainActivity extends AppCompatActivity {
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
+
+
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
                     Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
                     v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -37,12 +53,20 @@ public class MainActivity extends AppCompatActivity {
                 }
         );
 
+
+
+
+
         SensorManager sm = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         Sensor accelerometer = sm.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
 
         Sensor gyroscope = sm.getDefaultSensor(Sensor.TYPE_GYROSCOPE);
 
         Button button = findViewById(R.id.ShakeButton);
+        ProgressBar progressBar = findViewById(R.id.progressBar2);
+        ImageView imageView = findViewById(R.id.imageView3);
+        imageView.setVisibility(View.INVISIBLE);
+
 
         SensorEventListener sensorEventListener = new SensorEventListener() {
             @Override
@@ -67,8 +91,21 @@ public class MainActivity extends AppCompatActivity {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
+                                int currentProgress = progressBar.getProgress();
+                                progressBar.setMax(100);
+
                                 button.setBackgroundColor(Color.RED);
+
                                 Toast.makeText(MainActivity.this, "Rotatated quickly at:  " + rotation, Toast.LENGTH_SHORT).show();
+                                if (currentProgress < progressBar.getMax()){
+                                    progressBar.setProgress(currentProgress + 5);
+
+                                }else if(progressBar.getMax() == 100){
+                                    progressBar.setProgress(0);
+                                    button.setBackgroundColor(Color.BLACK);
+                                    imageView.setVisibility(View.VISIBLE);
+
+                                }
                             }
                         });
                     }

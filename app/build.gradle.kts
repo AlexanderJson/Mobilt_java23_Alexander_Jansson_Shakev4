@@ -37,6 +37,13 @@ dependencies {
     implementation(libs.material)
     implementation(libs.activity)
     implementation(libs.constraintlayout)
+
+    implementation (libs.org.rajawali3d.rajawali)
+    implementation (libs.rajawali.vvuforia)
+    implementation (libs.org.rajawali3d.rajawali)
+
+
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)

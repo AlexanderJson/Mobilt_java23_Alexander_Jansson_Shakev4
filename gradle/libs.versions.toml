@@ -1,5 +1,7 @@
 [versions]
 agp = "8.6.0"
+filamentAndroid = "1.12.7"
+gltfioAndroidVersion = "1.9.9"
 junit = "4.13.2"
 junitVersion = "1.1.5"
 espressoCore = "3.5.1"
@@ -7,8 +9,15 @@ appcompat = "1.6.1"
 material = "1.10.0"
 activity = "1.8.0"
 constraintlayout = "2.1.4"
+rajawali = "1.1.970"
+rajawali3dRajawali = "1.1.970"
+rajawali3dRajawaliVersion = "vuforia"
+rajawaliVersion = "1.1.970-SNAPSHOT"
 
 [libraries]
+filament-android = { module = "com.google.android.filament:filament-android", version.ref = "filamentAndroid" }
+filament-gltfio-android = { module = "com.google.android.filament:gltfio-android", version.ref = "gltfioAndroidVersion" }
+google-filament-utils-android = { module = "com.google.android.filament:filament-utils-android", version.ref = "gltfioAndroidVersion" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
@@ -16,6 +25,11 @@ appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "a
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
 constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
+org-rajawali3d-rajawali = { module = "org.rajawali3d:rajawali", version.ref = "rajawali3dRajawali" }
+rajawali-v11970snapshot = { module = "org.rajawali3d:rajawali", version.ref = "rajawaliVersion" }
+rajawali-vvuforia = { module = "org.rajawali3d:rajawali", version.ref = "rajawali3dRajawaliVersion" }
+
+
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
