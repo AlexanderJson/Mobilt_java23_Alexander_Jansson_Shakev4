@@ -2,6 +2,9 @@ package com.example.mobilt_java23_alexander_jansson_shakev4;
 
 import static android.content.ContentValues.TAG;
 
+
+
+
 import android.content.Context;
 import android.graphics.Color;
 import android.hardware.Sensor;
@@ -27,12 +30,25 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-import android.media.MediaPlayer;
+
+import android.app.AlarmManager;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.os.SystemClock;
+import android.widget.Toast;
+
 
 
 import org.w3c.dom.Text;
 
 import java.io.IOException;
+
+
+import android.media.MediaPlayer;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -57,6 +73,8 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+
+
         SensorManager sm = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         Sensor accelerometer = sm.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
 
@@ -66,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
         ProgressBar progressBar = findViewById(R.id.progressBar2);
         ImageView imageView = findViewById(R.id.imageView3);
         imageView.setVisibility(View.INVISIBLE);
-
+        TextView textView = findViewById(R.id.shakeText);
 
         SensorEventListener sensorEventListener = new SensorEventListener() {
             @Override
@@ -123,6 +141,7 @@ public class MainActivity extends AppCompatActivity {
         sm.registerListener(sensorEventListener, gyroscope, SensorManager.SENSOR_DELAY_NORMAL);
 
     }
+
 }
 
 
